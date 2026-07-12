@@ -1,0 +1,49 @@
+name: CI Pipeline
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+env:
+  NODE_VERSION: "20"
+  APP_NAME: cron-ticker
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      BUILD_DIR: dist
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show variables
+        run: |
+          echo "App: ${{ env.APP_NAME }}, Node: ${{ env.NODE_VERSION}}"
+
+      - name: Show Gihub Variables
+        run: |
+          echo "App Version: ${{ vars.APP_VERSION }}"
+
+      # Agregar  variable Node Version 24
+      - name: Show Gihub Variables NODE
+        run: |
+          echo "Node Version: ${{ vars.NODE_VERSION }}"
+
+      - name: Deploy API
+        run: |
+          echo "Deploying with key ${{secrets.API_KEY}}"
+
+      # Agregar nuevo step y nuevo secret en github
+         
+      # Variables a nivel del step    
+      - name: Build
+        run: npm run build
+        env:
+          APP_VERSION: '2.0.0'
+
+

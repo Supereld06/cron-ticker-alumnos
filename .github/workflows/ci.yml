@@ -24,7 +24,12 @@ jobs:
       - name: Show variables
         run: |
           echo "App: ${{ env.APP_NAME }}, Node: ${{ env.NODE_VERSION}}"
-          
+
+      - name: Show Gihub Variables
+        run: |
+          echo "App Version: ${{ vars.APP_VERSION }}"
+         
+      # Variables a nivel del step    
       - name: Build
         run: npm run build
         env:
